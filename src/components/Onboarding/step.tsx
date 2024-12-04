@@ -1,32 +1,34 @@
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { useOnboarding } from '../useOnboarding';
+import { useOnboarding } from './useOnboarding';
 import { motion } from 'framer-motion';
 
-export function Step2() {
+type StepProps = {
+  key: string;
+  title: string;
+  text: string;
+  cta: string;
+};
+
+export function Step({ key, title, text, cta }: StepProps) {
   const nextStep = useOnboarding(state => state.nextStep);
 
   return (
     <motion.div
-      key='step2'
+      key={key}
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       className='flex flex-col w-full max-w-lg h-fit text-center items-center'
     >
       <div className='flex flex-col items-center text-center gap-4'>
-        <h1 className='mb-2 text-2xl font-semibold text-gray-50'>
-          Welcome to the Jungle!
-        </h1>
-        <p className='text-zinc-400 mb-6'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-          corporis repellat qui iure? Cum, blanditiis.
-        </p>
+        <h1 className='mb-2 text-2xl font-semibold text-gray-50'>{title}</h1>
+        <p className='text-zinc-400 mb-6'>{text}</p>
       </div>
 
       <div className='flex flex-col gap-3 items-center w-full'>
         <Button className='w-fit group' size='sm' onClick={nextStep}>
-          See how Atmosphere works
+          {cta}
           <ChevronRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
         </Button>
 
